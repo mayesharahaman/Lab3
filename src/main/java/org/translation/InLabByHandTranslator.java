@@ -3,9 +3,6 @@ package org.translation;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Task: modify this class so that it also supports the Spanish language code "es" and
-//            one more language code of your choice. Each member of your group should add
-//            support for one additional langauge code on a branch; then push and create a pull request on GitHub.
 
 // Extra Task: if your group has extra time, you can add support for another country code in this class.
 
@@ -14,6 +11,8 @@ import java.util.List;
  * the country code "can" to several languages.
  */
 public class InLabByHandTranslator implements Translator {
+    public static final String CANADA = "can";
+
     /**
      * Returns the language abbreviations for all languages whose translations are
      * available for the given country.
@@ -23,15 +22,11 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public List<String> getCountryLanguages(String country) {
-        // TODO Checkstyle: The String "can" appears 4 times in the file.
-        if ("can".equals(country)) {
-            return new ArrayList<>(List.of("de", "en", "zh"));
+        if (CANADA.equals(country)) {
+            return new ArrayList<>(List.of("de", "en", "zh", "es", "ru"));
         }
         return new ArrayList<>();
     }
-
-    // TODO Checkstyle: Static variable definition in wrong order.
-    public static final String CANADA = "can";
 
     /**
      * Returns the country abbreviations for all countries whose translations are
@@ -41,7 +36,7 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public List<String> getCountries() {
-        return new ArrayList<>(List.of("can"));
+        return new ArrayList<>(List.of(CANADA));
     }
 
     /**
@@ -53,22 +48,28 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public String translate(String country, String language) {
-        // TODO Checkstyle: Return count is 5 (max allowed for non-void methods/ lambdas is 2).
-        // TODO Checkstyle: String literal expressions should be on the left side of an equals comparison
-        if (!country.equals("can")) {
-            return null;
+        String value = "";
+        if (!CANADA.equals(country)) {
+            value = null;
         }
-        if (language.equals("de")) {
-            return "Kanada";
+        if ("de".equals(language)) {
+            value = "Kanada";
         }
-        else if (language.equals("en")) {
-            return "Canada";
+        else if ("en".equals(language)) {
+            value = "Canada";
         }
         else if ("zh".equals(language)) {
-            return "加拿大";
+            value = "加拿大";
+        }
+        else if ("es".equals(language)) {
+            value = "Canadá";
+        }
+        else if ("ru".equals(language)) {
+            value = "Канада";
         }
         else {
-            return null;
+            value = null;
         }
+        return value;
     }
 }
