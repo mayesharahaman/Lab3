@@ -1,5 +1,6 @@
 package org.translation;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -71,16 +72,25 @@ public class Main {
 
     // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForCountry(Translator translator) {
+        LanguageCodeConverter languageCodeConverter = new LanguageCodeConverter();
         List<String> countries = translator.getCountries();
+        List<String> countryNames = new ArrayList<>();
+
         // TODO Task: replace the following println call, sort the countries alphabetically,
         //            and print them out; one per line
         //      hint: class Collections provides a static sort method
         // TODO Task: convert the country codes to the actual country names before sorting
-        Collections.sort(countries);
-        for (String country : countries) {
-            System.out.println(country);
-        }
 
+        for (String country : countries) {
+            String name = languageCodeConverter.fromLanguageCode(country);
+            if (name != null) {
+                countryNames.add(name);
+            }
+        }
+        Collections.sort(countryNames);
+        for (String countryName : countryNames) {
+            System.out.println(countryName);
+        }
         System.out.println("select a country from above:");
 
         Scanner s = new Scanner(System.in);
@@ -90,12 +100,21 @@ public class Main {
 
     // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForLanguage(Translator translator, String country) {
+        LanguageCodeConverter languageCodeConverter = new LanguageCodeConverter();
 
         // TODO: replace the line below so that we sort the languages alphabetically and print them out; one per line
         // TODO Task: convert the language codes to the actual language names before sorting
         List<String> languages = translator.getCountryLanguages(country);
-        Collections.sort(languages);
+        List<String> languageNames = new ArrayList<>();
+
         for (String language : languages) {
+            String name = languageCodeConverter.fromLanguageCode(language);
+            if (name != null) {
+                languageNames.add(name);
+            }
+        }
+        Collections.sort(languageNames);
+        for (String language : languageNames) {
             System.out.println(language);
         }
 

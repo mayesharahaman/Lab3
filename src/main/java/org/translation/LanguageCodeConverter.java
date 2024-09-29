@@ -41,7 +41,8 @@ public class LanguageCodeConverter {
             // TODO Task: use lines to populate the instance variable
             //           tip: you might find it convenient to create an iterator using lines.iterator()
 
-            for (String line : lines) {
+            for (int i = 1; i < lines.size(); i++) {
+                String line = lines.get(i);
                 String[] parts = line.split("\t");
                 if (parts.length >= 2) {
                     String name = parts[0].trim();
